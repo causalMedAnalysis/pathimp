@@ -1,0 +1,32 @@
+{smcl}
+{txt}{sf}{ul off}
+{.-}
+{s6hlp}
+package ^pathimp^ from https://github.com/causalMedAnalysis/pathimp
+{smcl}
+{.-}
+{s6hlp}
+
+{smcl}
+{hilite:TITLE}{p 6 8}'PATHIMP': module to estimate path-specific effects using pure regression imputation{p_end}
+{s6hlp}
+
+^DESCRIPTION/AUTHOR(S)^
+      
+pathimp estimates path-specific effects using pure regression imputation.
+      
+Requires: Stata version 15
+      
+Distribution-Date: 20240710
+      
+Author: Geoff Wodtke, University of Chicago
+Support: email wodtke@@uchicago.edu
+      
+
+^INSTALLATION FILES^                              (type ^net install^ ^pathimp^)
+      pathimp.ado
+	  pathimpbs.ado
+	  mpathimp.ado
+      pathimp.sthlp
+
+{txt}{sf}{ul off}
