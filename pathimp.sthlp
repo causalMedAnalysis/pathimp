@@ -14,9 +14,20 @@
 
 {p 8 18 2}
 {cmd:pathimp} {depvar} {help indepvars:mvars} {ifin} [{it:{help weight:pweight}}] {cmd:,} 
-dvar({varname}) d({it:real}) dstar({it:real}) yreg(string)
-[cvars({varlist}) {opt nointer:action} {opt cxd} {opt cxm} 
-reps({it:integer}) strata({varname}) cluster({varname}) level(cilevel) seed({it:passthru}) detail]
+{opt dvar(varname)} 
+{opt d(real)} 
+{opt dstar(real)} 
+{opt yreg(string)}
+{opt cvars(varlist)} 
+{opt nointer:action} 
+{opt cxd} 
+{opt cxm} 
+{opt reps(integer 200)} 
+{opt strata(varname)}
+{opt cluster(varname)} 
+{opt level(cilevel)} 
+{opt seed(passthru)} 
+{opt detail}
 
 {phang}{opt depvar} - this specifies the outcome variable.
 
