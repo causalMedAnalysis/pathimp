@@ -114,13 +114,13 @@ program define pathimpbs, rclass
 			dvar(`dvar') cvars(`cvars') yreg(`yreg') ///
 			d(`d') dstar(`dstar') `cxd' `cxm' `nointeraction'
 		
-		scalar mnde_M1M2=r(nde)
+		qui scalar mnde_M1M2=r(nde)
 		
-		qui mpathimp `yvar' `mvar1' [`weight' `exp'] if `touse', ///
+		mpathimp `yvar' `mvar1' [`weight' `exp'] if `touse', ///
 			dvar(`dvar') cvars(`cvars') yreg(`yreg') ///
 			d(`d') dstar(`dstar') `cxd' `cxm' `nointeraction'
 		
-		scalar mnde_M1=r(nde)
+		qui scalar mnde_M1=r(nde)
 		
 		return scalar pse_DY=mnde_M1M2M3M4
 		return scalar pse_DM4Y=mnde_M1M2M3-mnde_M1M2M3M4
