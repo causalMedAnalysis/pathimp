@@ -33,7 +33,7 @@ program define pathimpbs, rclass
 	foreach v of local mvars {
 		local mvar`i' `v'
 		local ++i
-		}
+	}
 	
 	if (`num_mvars' == 1) {
 	
@@ -45,7 +45,7 @@ program define pathimpbs, rclass
 		return scalar nie=r(nie)
 		return scalar ate=r(ate)
 	
-		}
+	}
 
 	if (`num_mvars' == 2) {
 	
@@ -66,7 +66,7 @@ program define pathimpbs, rclass
 		return scalar pse_DM1Y=r(nie)
 		return scalar ate=r(ate)
 		
-		}
+	}
 
 	if (`num_mvars' == 3) {
 	
@@ -94,7 +94,7 @@ program define pathimpbs, rclass
 		return scalar pse_DM1Y=r(nie)
 		return scalar ate=r(ate)
 		
-		}
+	}
 
 	if (`num_mvars' == 4) {
 	
@@ -129,7 +129,7 @@ program define pathimpbs, rclass
 		return scalar pse_DM1Y=r(nie)
 		return scalar ate=r(ate)
 		
-		}
+	}
 	
 	if (`num_mvars' == 5) {
 
@@ -171,6 +171,6 @@ program define pathimpbs, rclass
 		return scalar pse_DM1Y=r(nie)
 		return scalar ate=r(ate)
 		
-		}
+	}
 
 end pathimpbs

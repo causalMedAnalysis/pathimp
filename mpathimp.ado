@@ -23,7 +23,7 @@ program define mpathimp, rclass
 		count if `touse'
 		if r(N) == 0 error 2000
 		local N = r(N)
-		}
+	}
 			
 	gettoken yvar mvars : varlist
 
@@ -32,16 +32,16 @@ program define mpathimp, rclass
 			tempvar i_`m'
 			qui gen `i_`m'' = `dvar' * `m' if `touse'
 			local inter `inter' `i_`m''
-			}
 		}
+	}
 
 	if ("`cxd'"!="") {	
 		foreach c in `cvars' {
 			tempvar dX`c'
 			qui gen `dX`c'' = `dvar' * `c' if `touse'
 			local cxd_vars `cxd_vars' `dX`c''
-			}
 		}
+	}
 
 	local i = 1
 	if ("`cxm'"!="") {	
@@ -51,9 +51,9 @@ program define mpathimp, rclass
 				qui gen `mXc`i'' = `m' * `c' if `touse'
 				local cxm_vars `cxm_vars' `mXc`i''
 				local ++i
-				}
 			}
 		}
+	}
 
 	tempvar dvar_orig
 	qui gen `dvar_orig' = `dvar' if `touse'
@@ -69,8 +69,8 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 		
 		qui predict `yhat`d'M`d'' if `touse', xb
 		
@@ -79,8 +79,8 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 			
 		qui predict `yhat`dstar'M`dstar'' if `touse', xb
 		
@@ -89,8 +89,8 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 		
 		di ""
 		di "Model for `yvar' given {cvars `dvar' `mvars'}:"
@@ -103,14 +103,14 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 			
 		if ("`nointeraction'" == "") {
 			foreach m in `mvars' {
 				qui replace `i_`m'' = `dvar' * `m' if `touse'
-				}
 			}
+		}
 		
 		qui predict `yhatC`d'M' if `touse', xb
 		
@@ -119,14 +119,14 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 			
 		if ("`nointeraction'" == "") {
 			foreach m in `mvars' {
 				qui replace `i_`m'' = `dvar' * `m' if `touse'
-				}
 			}
+		}
 		
 		di ""
 		di "Model for predictions from previous model under D:=d given {cvars `dvar'}:"
@@ -139,8 +139,8 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 		
 		qui predict `yhat`d'M`dstar'' if `touse', xb
 		
@@ -149,10 +149,10 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
 			}
-		
 		}
+		
+	}
 
 	if ("`yreg'"=="logit") {
 	
@@ -165,8 +165,8 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 		
 		qui predict `yhat`d'M`d'' if `touse'
 		
@@ -175,8 +175,8 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 			
 		qui predict `yhat`dstar'M`dstar'' if `touse'
 		
@@ -185,8 +185,8 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 		
 		di ""
 		di "Model for `yvar' given {cvars `dvar' `mvars'}:"
@@ -199,14 +199,14 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 			
 		if ("`nointeraction'" == "") {
 			foreach m in `mvars' {
 				qui replace `i_`m'' = `dvar' * `m' if `touse'
-				}
 			}
+		}
 			
 		qui predict `yhatC`d'M' if `touse'
 		
@@ -215,14 +215,14 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 			
 		if ("`nointeraction'" == "") {
 			foreach m in `mvars' {
 				qui replace `i_`m'' = `dvar' * `m' if `touse'
-				}
 			}
+		}
 		
 		di ""
 		di "Model for predictions from previous model under D:=d given {cvars `dvar'}:"
@@ -235,8 +235,8 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 		
 		qui predict `yhat`d'M`dstar'' if `touse'
 		
@@ -245,10 +245,10 @@ program define mpathimp, rclass
 		if ("`cxd'"!="") {	
 			foreach c in `cvars' {
 				qui replace `dX`c'' = `dvar' * `c' if `touse'
-				}
-			}	
+			}
+		}	
 	
-		}
+	}
 	
 	tempvar ATEgivenC NDEgivenC NIEgivenC
 	qui gen `ATEgivenC' = `yhat`d'M`d'' - `yhat`dstar'M`dstar'' if `touse'
