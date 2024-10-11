@@ -1,4 +1,4 @@
-# pathimp: Analysis of Path-Specific Effects Using Pure Regression Imputation
+# pathimp: A Stata Module for Analysis of Path-Specific Effects Using Pure Regression Imputation
 
 `pathimp` is a Stata module designed to analyze path-specific effects using pure regression imputation.
 
@@ -23,16 +23,12 @@ pathimp depvar mvars, dvar(varname) d(real) dstar(real) yreg(string) [options]
 - `nointer`: Excludes treatment-mediator interactions in the outcome model.
 - `cxd`: Includes all two-way interactions between the treatment and baseline covariates.
 - `cxm`: Includes all two-way interactions between the mediators and baseline covariates.
-- `reps(integer)`: Number of bootstrap replications, default is 200.
-- `strata(varname)`: Variable that identifies resampling strata.
-- `cluster(varname)`: Variable that identifies resampling clusters.
-- `level(cilevel)`: Confidence level for constructing bootstrap confidence intervals, default is 95%.
-- `seed(passthru)`: Seed for bootstrap resampling.
 - `detail`: Prints the fitted models for the outcome.
+- `bootstrap_options`: All `bootstrap` options are available.
 
 ## Description
 
-`pathimp` estimates path-specific effects using pure regression imputation, addressing the explanatory role of multiple, causally ordered mediators.
+`pathimp` estimates path-specific effects using pure regression imputation, and it computes inferential statistics using the nonparametric bootstrap. 
 
 With `K` causally ordered mediators, the implementation proceeds as follows:
 
@@ -60,6 +56,9 @@ With `K` causally ordered mediators, the implementation proceeds as follows:
 
 If only a single mediator is specified, `pathimp` reverts to estimates of conventional natural direct and indirect effects through a univariate mediator.
 
+
+`pathimp` allows sampling weights via the `pweights` option, but it does not internally rescale them for use with the bootstrap. If using weights from a complex sample design that require rescaling to produce valid boostrap estimates, the user must be sure to appropriately specify the `strata`, `cluster`, and `size` options from the `bootstrap` command so that Nc-1 clusters are sampled within from each stratum, where Nc denotes the number of clusters per stratum. Failure to properly adjust the bootstrap sampling to account for a complex sample design that requires weighting could lead to invalid inferential statistics.
+
 ## Examples
 
 ```stata
@@ -67,13 +66,13 @@ If only a single mediator is specified, `pathimp` reverts to estimates of conven
 use nlsy79.dta
 
 // Default settings with two causally ordered mediators
-pathimp std_cesd_age40, dvar(att22) mvars(ever_unemp_age3539 log_faminc_adj_age3539) cvars(female black hispan paredu parprof parinc_prank famsize afqt3) d(1) dstar(0) yreg(regress) reps(1000)
+pathimp std_cesd_age40, dvar(att22) mvars(ever_unemp_age3539 log_faminc_adj_age3539) cvars(female black hispan paredu parprof parinc_prank famsize afqt3) d(1) dstar(0) yreg(regress) 
 
 // Include all two-way interactions
-pathimp std_cesd_age40, dvar(att22) mvars(ever_unemp_age3539 log_faminc_adj_age3539) cvars(female black hispan paredu parprof parinc_prank famsize afqt3) d(1) dstar(0) yreg(regress) cxd cxm reps(1000)
+pathimp std_cesd_age40, dvar(att22) mvars(ever_unemp_age3539 log_faminc_adj_age3539) cvars(female black hispan paredu parprof parinc_prank famsize afqt3) d(1) dstar(0) yreg(regress) cxd cxm 
 
-// No interactions, printing models
-pathimp std_cesd_age40, dvar(att22) mvars(ever_unemp_age3539 log_faminc_adj_age3539) cvars(female black hispan paredu parprof parinc_prank famsize afqt3) d(1) dstar(0) yreg(regress) nointer reps(1000) detail
+// No interactions, 1000 bootstrap replications, printing detailed output
+pathimp std_cesd_age40, dvar(att22) mvars(ever_unemp_age3539 log_faminc_adj_age3539) cvars(female black hispan paredu parprof parinc_prank famsize afqt3) d(1) dstar(0) yreg(regress) nointer detail reps(1000) 
 ```
 
 ## Saved Results
